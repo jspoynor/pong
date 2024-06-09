@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://cj1d7xnc6grsb"]
+
+[ext_resource type="FontFile" uid="uid://dw131p24l75wh" path="res://assets/fonts/Abaddon Bold.ttf" id="1_iyujt"]
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_lhwhb"]
+[ext_resource type="Script" path="res://scripts/titleBall.gd" id="2_rak4h"]
+[ext_resource type="Texture2D" uid="uid://dwes578lbdgq5" path="res://assets/sprites/Square/Square-0001.png" id="3_2e1ve"]
+[ext_resource type="AudioStream" uid="uid://08gq3leoyspa" path="res://assets/sounds/hit-effect.wav" id="4_fqymq"]
+[ext_resource type="AudioStream" uid="uid://cu4qpdv5wwyea" path="res://assets/sounds/wall-hit.wav" id="5_67ji5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5cer"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imn2v"]
+size = Vector2(37, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwhoe"]
+size = Vector2(1352, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nih0y"]
+
+[node name="titleScreen" type="Node2D"]
+script = ExtResource("1_lhwhb")
+
+[node name="background" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="background"]
+z_index = -2
+offset_left = -607.0
+offset_top = -349.0
+offset_right = 611.0
+offset_bottom = 344.0
+color = Color(0.0196078, 0, 0.121569, 1)
+
+[node name="PONG" type="Label" parent="background"]
+offset_left = -340.0
+offset_top = -293.0
+offset_right = 326.0
+offset_bottom = -45.0
+theme_override_fonts/font = ExtResource("1_iyujt")
+theme_override_font_sizes/font_size = 220
+text = "PONG"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="background"]
+offset_left = -136.0
+offset_top = 25.0
+offset_right = 136.0
+offset_bottom = 145.0
+theme_override_fonts/font = ExtResource("1_iyujt")
+theme_override_font_sizes/font_size = 90
+text = "Start"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="background"]
+z_index = -1
+offset_left = -136.0
+offset_right = 152.0
+offset_bottom = 128.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c5cer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="borders" type="StaticBody2D" parent="."]
+
+[node name="wallL" type="CollisionShape2D" parent="borders"]
+position = Vector2(-592, 0)
+shape = SubResource("RectangleShape2D_imn2v")
+
+[node name="wallR" type="CollisionShape2D" parent="borders"]
+position = Vector2(592, 0)
+shape = SubResource("RectangleShape2D_imn2v")
+
+[node name="ceiling" type="CollisionShape2D" parent="borders"]
+position = Vector2(0, -336)
+shape = SubResource("RectangleShape2D_nwhoe")
+
+[node name="floor" type="CollisionShape2D" parent="borders"]
+position = Vector2(0, 336)
+shape = SubResource("RectangleShape2D_nwhoe")
+
+[node name="titleBall" type="CharacterBody2D" parent="."]
+script = ExtResource("2_rak4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="titleBall"]
+shape = SubResource("RectangleShape2D_nih0y")
+
+[node name="Sprite2D" type="Sprite2D" parent="titleBall"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_2e1ve")
+
+[node name="playerHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fqymq")
+
+[node name="borderHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_67ji5")
+
+[connection signal="button_down" from="background/Button" to="." method="_on_button_button_down"]

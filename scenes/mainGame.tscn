@@ -1,0 +1,307 @@
+[gd_scene load_steps=19 format=3 uid="uid://1c0mgtnngj5b"]
+
+[ext_resource type="Script" path="res://scripts/player1.gd" id="1_gtp0q"]
+[ext_resource type="Script" path="res://scripts/mainGame.gd" id="1_kib1y"]
+[ext_resource type="Texture2D" uid="uid://dwes578lbdgq5" path="res://assets/sprites/Square/Square-0001.png" id="2_2m1dk"]
+[ext_resource type="FontFile" uid="uid://dw131p24l75wh" path="res://assets/fonts/Abaddon Bold.ttf" id="2_071wv"]
+[ext_resource type="Script" path="res://scripts/player2.gd" id="3_qe07k"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="4_b6mqu"]
+[ext_resource type="AudioStream" uid="uid://cdxs01bkba7fp" path="res://assets/sounds/Vine-boom-sound-effect.mp3" id="6_1vkdm"]
+[ext_resource type="AudioStream" uid="uid://cu4qpdv5wwyea" path="res://assets/sounds/wall-hit.wav" id="6_2cjxm"]
+[ext_resource type="AudioStream" uid="uid://08gq3leoyspa" path="res://assets/sounds/hit-effect.wav" id="6_oybml"]
+[ext_resource type="AudioStream" uid="uid://bjqn0pu5vc0nf" path="res://assets/sounds/score.wav" id="6_sl7ue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85cy5"]
+size = Vector2(22, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cnyu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oamha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vm18o"]
+size = Vector2(22, 22)
+
+[sub_resource type="Animation" id="Animation_m4axq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/countDown:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("playerHit:pitch_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_0n2vs"]
+resource_name = "countdown"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/countDown:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["3
+", "2", "1", "Go!"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("playerHit")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("playerHit:pitch_scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1.03526),
+"update": 0,
+"values": [1.0, 1.75]
+}
+
+[sub_resource type="Animation" id="Animation_2jcg5"]
+resource_name = "matchPoint"
+length = 2.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/countDown:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 1.7, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Match Point
+", "3
+", "2", "1", "Go!
+"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("playerHit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.3, 1.7, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("playerHit:pitch_scale")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.75]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2jxr6"]
+_data = {
+"RESET": SubResource("Animation_m4axq"),
+"countdown": SubResource("Animation_0n2vs"),
+"matchPoint": SubResource("Animation_2jcg5")
+}
+
+[node name="mainGame" type="Node2D"]
+script = ExtResource("1_kib1y")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="player1" type="StaticBody2D" parent="."]
+position = Vector2(-470, 0)
+script = ExtResource("1_gtp0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="player1"]
+scale = Vector2(0.7, 5)
+texture = ExtResource("2_2m1dk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
+shape = SubResource("RectangleShape2D_85cy5")
+
+[node name="player2" type="StaticBody2D" parent="."]
+position = Vector2(470, 0)
+script = ExtResource("3_qe07k")
+
+[node name="Sprite2D" type="Sprite2D" parent="player2"]
+scale = Vector2(0.7, 5)
+texture = ExtResource("2_2m1dk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
+shape = SubResource("RectangleShape2D_85cy5")
+
+[node name="borders" type="StaticBody2D" parent="."]
+
+[node name="ceiling" type="CollisionShape2D" parent="borders"]
+position = Vector2(0, -328)
+scale = Vector2(60, 1)
+shape = SubResource("RectangleShape2D_cnyu8")
+
+[node name="floor" type="CollisionShape2D" parent="borders"]
+position = Vector2(0, 328)
+scale = Vector2(60, 1)
+shape = SubResource("RectangleShape2D_cnyu8")
+
+[node name="endZones" type="Node" parent="."]
+
+[node name="leftZone" type="Area2D" parent="endZones"]
+position = Vector2(-616, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="endZones/leftZone"]
+scale = Vector2(1, 37.75)
+shape = SubResource("RectangleShape2D_oamha")
+
+[node name="rightZone" type="Area2D" parent="endZones"]
+position = Vector2(616, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="endZones/rightZone"]
+scale = Vector2(1, 37.75)
+shape = SubResource("RectangleShape2D_oamha")
+
+[node name="ball" type="CharacterBody2D" parent="."]
+script = ExtResource("4_b6mqu")
+
+[node name="Sprite2D" type="Sprite2D" parent="ball"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_2m1dk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+shape = SubResource("RectangleShape2D_vm18o")
+
+[node name="vineBoom" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-795, -416)
+stream = ExtResource("6_1vkdm")
+
+[node name="score" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-795, -416)
+stream = ExtResource("6_sl7ue")
+
+[node name="borderHit" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-795, -416)
+stream = ExtResource("6_2cjxm")
+
+[node name="playerHit" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-795, -416)
+stream = ExtResource("6_oybml")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="player1Score" type="Label" parent="CanvasLayer"]
+offset_left = -160.0
+offset_top = -300.0
+offset_right = -44.0
+offset_bottom = -210.0
+theme_override_fonts/font = ExtResource("2_071wv")
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 1
+
+[node name="player2Score" type="Label" parent="CanvasLayer"]
+offset_left = 44.0
+offset_top = -300.0
+offset_right = 160.0
+offset_bottom = -210.0
+theme_override_fonts/font = ExtResource("2_071wv")
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+offset_left = -795.0
+offset_top = -416.0
+offset_right = 764.0
+offset_bottom = 420.0
+color = Color(0.0196078, 0, 0.121569, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2jxr6")
+}
+
+[node name="countDown" type="Label" parent="AnimationPlayer"]
+offset_left = -433.0
+offset_top = -80.0
+offset_right = 431.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("2_071wv")
+theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="endZones/leftZone" to="." method="_on_left_zone_body_entered"]
+[connection signal="body_entered" from="endZones/rightZone" to="." method="_on_right_zone_body_entered"]
